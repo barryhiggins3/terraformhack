@@ -41,4 +41,6 @@ module "security_centre" {
   source = "./modules/securitycentre"
   resname = var.security_centre_RG_Name
   location = var.location
+  subscription_id = var.subscription_id
+
 }

@@ -6,3 +6,7 @@ variable "resname" {
 variable "subscription_id" {
 
 }
+variable "location" {
+    default ="UK South"
+  
+}
