@@ -11,7 +11,7 @@ terraform {
 }
 resource "azurerm_resource_group" "example" {
   name     = "example-resources"
-  location = "West Europe"
+  location = var.location
 }
 module "storage" {
   source               = "./modules/storageaccounts"
@@ -28,10 +28,17 @@ module "storage2" {
 }
 
 module "network_resourcegroup" {
-  source               = "./modules/resourcegroups"
-  resname = "SBD-RG-NET"
+  source   = "./modules/resourcegroups"
+  resname  = var.network_resourcegroup_name
+  location = var.location
 }
 module "network" {
-  source               = "./modules/network"
-  resname = module.network_resourcegroup.resource_group_name
+  source   = "./modules/network"
+  resname  = module.network_resourcegroup.resource_group_name
+  location = var.location
+}
+module "security_centre" {
+  source = "./modules/securitycentre"
+  resname = var.security_centre_RG_Name
+  location = var.location
 }
