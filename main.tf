@@ -7,13 +7,13 @@ resource "azurerm_resource_group" "example" {
   location = "West Europe"
 }
 module "storage" {
-  source               = "./Modules/StorageAccounts"
+  source               = "./modules/storageaccounts"
   storage_account_name = "modalityhacksto4"
   location             = azurerm_resource_group.example.location
   resourcegroupname    = azurerm_resource_group.example.name
 }
 module "storage2" {
-  source               = "./Modules/StorageAccounts"
+  source               = "./modules/storageaccounts"
   storage_account_name = "modalityhacksto5"
   Replication_type     = "GRS"
   location             = azurerm_resource_group.example.location
