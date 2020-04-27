@@ -27,4 +27,5 @@ resource "azurerm_log_analytics_solution" "solution-sentinel" {
     publisher = "Microsoft"
     product   = "OMSGallery/SecurityInsights"
   }
+
 }

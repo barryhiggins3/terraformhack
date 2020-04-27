@@ -44,3 +44,14 @@ module "security_centre" {
   subscription_id = var.subscription_id
 
 }
+module "log_analytics" {
+    source                  = "https://github.com/aztfmod/log_analytics.git?ref=latest"
+
+    name                              = var.name
+    solution_plan_map                 = var.solutions
+    resname                           = azurerm_resource_group.example.name
+    location                          = var.location
+    tags                              = var.tags
+
+}
+
