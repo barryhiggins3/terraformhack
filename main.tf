@@ -38,20 +38,20 @@ module "network" {
   location = var.location
 }
 module "security_centre" {
-  source = "./modules/securitycentre"
-  resname = var.security_centre_RG_Name
-  location = var.location
+  source          = "./modules/securitycentre"
+  resname         = var.security_centre_RG_Name
+  location        = var.location
   subscription_id = var.subscription_id
 
 }
 module "log_analytics" {
-    source                  = "https://github.com/aztfmod/log_analytics.git?ref=latest"
-
-    name                              = var.name
-    solution_plan_map                 = var.solutions
-    resname                           = azurerm_resource_group.example.name
-    location                          = var.location
-    tags                              = var.tags
+  source              = "./modules/log_analytics"
+  #name                = var.name
+  #solution_plan_map   = var.solution_plan_map
+  #resource_group_name = var.rg
+  #location            = var.location
+ 
+ 
 
 }
 
