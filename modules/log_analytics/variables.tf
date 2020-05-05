@@ -14,7 +14,7 @@ variable "prefix" {
 }
 
 variable "name" {
-  default     = "sbd-la-slz"
+  default     = "la-slz"
   description = "Log Analytics workspace name"
 
 }
