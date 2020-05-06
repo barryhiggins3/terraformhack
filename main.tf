@@ -7,7 +7,7 @@ terraform {
     storage_account_name = "modalitytfstate"
     container_name       = "tfstate"
     key                  = "prod.terraform.tfstate"
-  }
+     }
 }
 resource "azurerm_resource_group" "example" {
   name     = "example-resources"
