@@ -36,6 +36,23 @@ module "network" {
   source   = "./modules/network"
   resname  = module.network_resourcegroup.resource_group_name
   location = var.location
+  subnets = [
+    {
+      subnet_name                      = "web"
+      subnet_address_prefix            = "10.100.0.0/24"
+     # subnet_network_security_group_id = module.virtual_net_nsg.network_security_group_id
+    },
+    {
+      subnet_name                      = "app"
+      subnet_address_prefix            = "10.100.1.0/24"
+      #subnet_network_security_group_id = module.virtual_net_nsg.network_security_group_id
+    },
+    {
+      subnet_name                      = "domain"
+      subnet_address_prefix            = "10.100.2.0/24"
+     # subnet_network_security_group_id = module.virtual_net_nsg.network_security_group_id
+    }
+  ]
 }
 module "security_centre" {
   source          = "./modules/securitycentre"
@@ -74,39 +91,39 @@ module "virtual_net_nsg" {
   # log_analytics_workspace   = var.log_analytics_workspace
   # diagnostics_map           = var.diagnostics_map
 
- rules = [
-        {
-            name                        = "allow-https"
-            priority                    = "1000"
-            protocol                    = "Tcp"
-            source_address_prefix       = "VirtualNetwork"
-            destination_port_ranges     = "443"
-            description                 = "Allow HTTPS"
-        },
-        {
-            name                        = "allow-ssh"
-            priority                    = "1010"
-            protocol                    = "Tcp"
-            source_address_prefix       = "VirtualNetwork"
-            destination_port_ranges     = "22"
-            description                 = "Allow SSH"
-        },
-        {
-            name                        = "allow-rdp"
-            priority                    = "1020"
-            protocol                    = "*"
-            source_address_prefix       = "VirtualNetwork"
-            destination_port_ranges     = "3389"
-            description                 = "Allow RDP"
-        },
-        {
-            name                        = "deny-all"
-            priority                    = "4000"
-            access                      = "Deny"
-            protocol                    = "*"
-            source_address_prefix       = "*"
-            destination_port_ranges     = "*"
-            description                 = "Deny unmatched inbound traffic"
-        }
+  rules = [
+    {
+      name                    = "allow-https"
+      priority                = "1000"
+      protocol                = "Tcp"
+      source_address_prefix   = "VirtualNetwork"
+      destination_port_ranges = "443"
+      description             = "Allow HTTPS"
+    },
+    {
+      name                    = "allow-ssh"
+      priority                = "1010"
+      protocol                = "Tcp"
+      source_address_prefix   = "VirtualNetwork"
+      destination_port_ranges = "22"
+      description             = "Allow SSH"
+    },
+    {
+      name                    = "allow-rdp"
+      priority                = "1020"
+      protocol                = "*"
+      source_address_prefix   = "VirtualNetwork"
+      destination_port_ranges = "3389"
+      description             = "Allow RDP"
+    },
+    {
+      name                    = "deny-all"
+      priority                = "4000"
+      access                  = "Deny"
+      protocol                = "*"
+      source_address_prefix   = "*"
+      destination_port_ranges = "*"
+      description             = "Deny unmatched inbound traffic"
+    }
   ]
 }

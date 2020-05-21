@@ -40,3 +40,10 @@ resource "azurerm_virtual_network" "virtual_network" {
 
   tags = var.tags
 }
+resource "azurerm_subnet" "Subnet" {
+  name                 =  lookup(var.subnets[count.index], "subnet_name", "default")
+  resource_group_name  = azurerm_virtual_network.virtual_network.resource_group_name
+  virtual_network_name = azurerm_virtual_network.virtual_network.name
+  address_prefix     = lookup(var.subnets[count.index], "subnet_address_prefix", ["10.0.1.0/24"])
+  count    = length(var.subnets)
+}

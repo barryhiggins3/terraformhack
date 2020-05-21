@@ -5,11 +5,13 @@ variable "location" {
 }
 variable "resname" {
   description = "Resource Group Name"
-
+}
+variable "subnets" {
+  description = "VNET Subnets"
 }
 variable "vnetname" {
   description = "Resource Group Name"
-  default ="SBD-NET-PROD"
+  default     = "SBD-NET-PROD"
 }
 variable "address_space" {
   default     = ["10.0.0.0/16"]
@@ -49,4 +51,3 @@ variable "tags" {
     buildagent  = "github-actions"
   }
 }
-
