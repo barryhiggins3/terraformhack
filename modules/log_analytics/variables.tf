@@ -21,7 +21,7 @@ variable "name" {
 
 variable "solution_plan_map" {
   description = "(Optional) Map structure containing the list of solutions to be enabled."
-  type        = "map"
+  type        = map
   default = {
     ADAssessment = {
       "publisher" = "Microsoft"
