@@ -54,4 +54,24 @@ module "log_analytics" {
  
 
 }
+#odule "subnets" {
+  #source                = "./modules/virtual_net_nsg/subnet"
 
+  #resource_group        = var.resource_group_name
+  #virtual_network_name  = azurerm_virtual_network.vnet.name
+  #subnets               = var.networking_object.subnets
+  #tags                  = local.tags
+  #location              = var.location
+#}
+
+#module "virtual_net_nsg" {
+  #source                    = "./modules/virtual_net_nsg/nsg"
+
+  #resource_group            = var.resource_group_name
+  #virtual_network_name      = azurerm_virtual_network.vnet.name
+  #subnets                   = var.networking_object.subnets
+  #tags                      = local.tags
+  #location                  = var.location
+  #log_analytics_workspace   = var.log_analytics_workspace
+  #diagnostics_map           = var.diagnostics_map
+#}
