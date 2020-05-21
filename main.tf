@@ -7,7 +7,7 @@ terraform {
     storage_account_name = "modalitytfstate"
     container_name       = "tfstate"
     key                  = "prod.terraform.tfstate"
-     }
+  }
 }
 resource "azurerm_resource_group" "example" {
   name     = "example-resources"
@@ -45,33 +45,32 @@ module "security_centre" {
 
 }
 module "log_analytics" {
-  source              = "./modules/log_analytics"
+  source = "./modules/log_analytics"
   #name                = var.name
   #solution_plan_map   = var.solution_plan_map
   #resource_group_name = var.rg
   #location            = var.location
- 
- 
+
+
 
 }
 #odule "subnets" {
-  #source                = "./modules/virtual_net_nsg/subnet"
+#source                = "./modules/virtual_net_nsg/subnet"
 
-  #resource_group        = var.resource_group_name
-  #virtual_network_name  = azurerm_virtual_network.vnet.name
-  #subnets               = var.networking_object.subnets
-  #tags                  = local.tags
-  #location              = var.location
+#resource_group        = var.resource_group_name
+#virtual_network_name  = azurerm_virtual_network.vnet.name
+#subnets               = var.networking_object.subnets
+#tags                  = local.tags
+#location              = var.location
 #}
 
-#module "virtual_net_nsg" {
-  #source                    = "./modules/virtual_net_nsg/nsg"
-
-  #resource_group            = var.resource_group_name
-  #virtual_network_name      = azurerm_virtual_network.vnet.name
-  #subnets                   = var.networking_object.subnets
-  #tags                      = local.tags
-  #location                  = var.location
-  #log_analytics_workspace   = var.log_analytics_workspace
-  #diagnostics_map           = var.diagnostics_map
-#}
+module "virtual_net_nsg" {
+  source = "./modules/virtual_net_nsg/nsg"
+  resname = module.network_resourcegroup.resource_group_name
+  # virtual_network_name      = azurerm_virtual_network.vnet.name
+  # subnets                   = var.networking_object.subnets
+  # tags                      = local.tags
+  location                  = var.location
+  # log_analytics_workspace   = var.log_analytics_workspace
+  # diagnostics_map           = var.diagnostics_map
+}
