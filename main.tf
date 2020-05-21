@@ -65,12 +65,48 @@ module "log_analytics" {
 #}
 
 module "virtual_net_nsg" {
-  source = "./modules/virtual_net_nsg/nsg"
+  source  = "./modules/virtual_net_nsg/nsg"
   resname = module.network_resourcegroup.resource_group_name
   # virtual_network_name      = azurerm_virtual_network.vnet.name
   # subnets                   = var.networking_object.subnets
   # tags                      = local.tags
-  location                  = var.location
+  location = var.location
   # log_analytics_workspace   = var.log_analytics_workspace
   # diagnostics_map           = var.diagnostics_map
+
+ rules = [
+        {
+            name                        = "allow-https"
+            priority                    = "1000"
+            protocol                    = "Tcp"
+            source_address_prefix       = "VirtualNetwork"
+            destination_port_ranges     = "443"
+            description                 = "Allow HTTPS"
+        },
+        {
+            name                        = "allow-ssh"
+            priority                    = "1010"
+            protocol                    = "Tcp"
+            source_address_prefix       = "VirtualNetwork"
+            destination_port_ranges     = "22"
+            description                 = "Allow SSH"
+        },
+        {
+            name                        = "allow-rdp"
+            priority                    = "1020"
+            protocol                    = "*"
+            source_address_prefix       = "VirtualNetwork"
+            destination_port_ranges     = "3389"
+            description                 = "Allow RDP"
+        },
+        {
+            name                        = "deny-all"
+            priority                    = "4000"
+            access                      = "Deny"
+            protocol                    = "*"
+            source_address_prefix       = "*"
+            destination_port_ranges     = "*"
+            description                 = "Deny unmatched inbound traffic"
+        }
+  ]
 }
