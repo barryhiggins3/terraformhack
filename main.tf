@@ -39,17 +39,17 @@ module "network" {
   subnets = [
     {
       subnet_name                      = "web"
-      subnet_address_prefix            = "10.100.0.0/24"
+      subnet_address_prefix            = "10.0.4.0/24"
      # subnet_network_security_group_id = module.virtual_net_nsg.network_security_group_id
     },
     {
       subnet_name                      = "app"
-      subnet_address_prefix            = "10.100.1.0/24"
+      subnet_address_prefix            = "10.0.5.0/24"
       #subnet_network_security_group_id = module.virtual_net_nsg.network_security_group_id
     },
     {
       subnet_name                      = "domain"
-      subnet_address_prefix            = "10.100.2.0/24"
+      subnet_address_prefix            = "10.0.6.0/24"
      # subnet_network_security_group_id = module.virtual_net_nsg.network_security_group_id
     }
   ]
