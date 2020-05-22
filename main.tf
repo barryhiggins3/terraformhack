@@ -51,6 +51,11 @@ module "network" {
       subnet_name                      = "domain"
       subnet_address_prefix            = "10.0.6.0/24"
       subnet_network_security_group_id = module.virtual_net_nsg.network_security_group_id
+    },
+    {
+      subnet_name                      = "data"
+      subnet_address_prefix            = "10.0.7.0/24"
+      subnet_network_security_group_id = module.virtual_net_nsg_2.network_security_group_id
     }
   ]
 }
@@ -98,7 +103,7 @@ module "virtual_net_nsg" {
       priority                = "1000"
       protocol                = "Tcp"
       source_address_prefix   = "VirtualNetwork"
-      destination_port_ranges = "443"
+      destination_port_range = "443"
       description             = "Allow HTTPS"
     },
     {
@@ -106,7 +111,7 @@ module "virtual_net_nsg" {
       priority                = "1010"
       protocol                = "Tcp"
       source_address_prefix   = "VirtualNetwork"
-      destination_port_ranges = "22"
+      destination_port_range = "22"
       description             = "Allow SSH"
     },
     {
@@ -114,7 +119,7 @@ module "virtual_net_nsg" {
       priority                = "1020"
       protocol                = "*"
       source_address_prefix   = "VirtualNetwork"
-      destination_port_ranges = "3389"
+      destination_port_range = "3389"
       description             = "Allow RDP"
     },
     {
@@ -123,7 +128,7 @@ module "virtual_net_nsg" {
       access                  = "Deny"
       protocol                = "*"
       source_address_prefix   = "*"
-      destination_port_ranges = "*"
+      destination_port_range = "*"
       description             = "Deny unmatched inbound traffic"
     }
   ]
@@ -145,7 +150,7 @@ module "virtual_net_nsg_2" {
       priority                = "1021"
       protocol                = "Tcp"
       source_address_prefix   = "VirtualNetwork"
-      destination_port_ranges = "1433"
+      destination_port_range = "1433"
       description             = "Allow SQL"
     },
     {
@@ -153,7 +158,7 @@ module "virtual_net_nsg_2" {
       priority                = "1022"
       protocol                = "Tcp"
       source_address_prefix   = "VirtualNetwork"
-      destination_port_ranges = "443"
+      destination_port_range = "443"
       description             = "Allow HTTPS"
     },
   {
@@ -161,7 +166,7 @@ module "virtual_net_nsg_2" {
       priority                = "1023"
       protocol                = "Tcp"
       source_address_prefix   = "VirtualNetwork"
-      destination_port_ranges = "80"
+      destination_port_range = "80"
       description             = "Allow HTTP"
     },
     {
@@ -170,7 +175,7 @@ module "virtual_net_nsg_2" {
       access                  = "Deny"
       protocol                = "*"
       source_address_prefix   = "*"
-      destination_port_ranges = "*"
+      destination_port_range = "*"
       description             = "Deny unmatched inbound traffic"
     }
   ]
