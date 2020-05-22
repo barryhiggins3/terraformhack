@@ -99,37 +99,37 @@ module "virtual_net_nsg" {
 
   rules = [
     {
-      name                    = "allow-https"
-      priority                = "1000"
-      protocol                = "Tcp"
-      source_address_prefix   = "VirtualNetwork"
+      name                   = "allow-https"
+      priority               = "1000"
+      protocol               = "Tcp"
+      source_address_prefix  = "VirtualNetwork"
       destination_port_range = "443"
-      description             = "Allow HTTPS"
+      description            = "Allow HTTPS"
     },
     {
-      name                    = "allow-ssh"
-      priority                = "1010"
-      protocol                = "Tcp"
-      source_address_prefix   = "VirtualNetwork"
+      name                   = "allow-ssh"
+      priority               = "1010"
+      protocol               = "Tcp"
+      source_address_prefix  = "VirtualNetwork"
       destination_port_range = "22"
-      description             = "Allow SSH"
+      description            = "Allow SSH"
     },
     {
-      name                    = "allow-rdp"
-      priority                = "1020"
-      protocol                = "*"
-      source_address_prefix   = "VirtualNetwork"
+      name                   = "allow-rdp"
+      priority               = "1020"
+      protocol               = "*"
+      source_address_prefix  = "VirtualNetwork"
       destination_port_range = "3389"
-      description             = "Allow RDP"
+      description            = "Allow RDP"
     },
     {
-      name                    = "deny-all"
-      priority                = "4000"
-      access                  = "Deny"
-      protocol                = "*"
-      source_address_prefix   = "*"
+      name                   = "deny-all"
+      priority               = "4000"
+      access                 = "Deny"
+      protocol               = "*"
+      source_address_prefix  = "*"
       destination_port_range = "*"
-      description             = "Deny unmatched inbound traffic"
+      description            = "Deny unmatched inbound traffic"
     }
   ]
 }
@@ -146,37 +146,41 @@ module "virtual_net_nsg_2" {
 
   rules = [
     {
-      name                    = "allow-SQL"
-      priority                = "1021"
-      protocol                = "Tcp"
-      source_address_prefix   = "VirtualNetwork"
+      name                   = "allow-SQL"
+      priority               = "1021"
+      protocol               = "Tcp"
+      source_address_prefix  = "VirtualNetwork"
       destination_port_range = "1433"
-      description             = "Allow SQL"
+      description            = "Allow SQL"
     },
     {
-      name                    = "allow-https"
-      priority                = "1022"
-      protocol                = "Tcp"
-      source_address_prefix   = "VirtualNetwork"
+      name                   = "allow-https"
+      priority               = "1022"
+      protocol               = "Tcp"
+      source_address_prefix  = "VirtualNetwork"
       destination_port_range = "443"
-      description             = "Allow HTTPS"
-    },
-  {
-      name                    = "allow-http"
-      priority                = "1023"
-      protocol                = "Tcp"
-      source_address_prefix   = "VirtualNetwork"
-      destination_port_range = "80"
-      description             = "Allow HTTP"
+      description            = "Allow HTTPS"
     },
     {
-      name                    = "deny-all"
-      priority                = "4000"
-      access                  = "Deny"
-      protocol                = "*"
-      source_address_prefix   = "*"
+      name                   = "allow-http"
+      priority               = "1023"
+      protocol               = "Tcp"
+      source_address_prefix  = "VirtualNetwork"
+      destination_port_range = "80"
+      description            = "Allow HTTP"
+    },
+    {
+      name                   = "deny-all"
+      priority               = "4000"
+      access                 = "Deny"
+      protocol               = "*"
+      source_address_prefix  = "*"
       destination_port_range = "*"
-      description             = "Deny unmatched inbound traffic"
+      description            = "Deny unmatched inbound traffic"
     }
   ]
+}
+module "policies" {
+  source  = "./modules/policies"
+  resname = module.network_resourcegroup.resource_group_name
 }
