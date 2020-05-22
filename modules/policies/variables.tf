@@ -1,3 +1,3 @@
-variable "resname" {
+variable "resid" {
   description = "Resource Group Name"
 }
