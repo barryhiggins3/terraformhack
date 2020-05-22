@@ -15,3 +15,12 @@ variable "tags" {
     buildagent  = "github-actions"
   }
 }
+<<<<<<< HEAD
+=======
+variable "rules" {
+  description = "The rule set for the network security group."
+}
+variable "nsgname" {
+  description = "Network security group name."
+}
+>>>>>>> 86515397c3ae9e8d5d7e01cd690ef4604f44d846
