@@ -182,5 +182,5 @@ module "virtual_net_nsg_2" {
 }
 module "policies" {
   source  = "./modules/policies"
-  resname = module.network_resourcegroup.resource_group_name
+  resid = module.network_resourcegroup.resource_group_id
 }

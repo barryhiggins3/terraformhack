@@ -3,12 +3,16 @@ data "azurerm_policy_set_definition" "azure_monitor" {
 }
 
 resource "azurerm_policy_assignment" "Policy-1" {
-  name                 = "example-policy-assignment"
-  scope                = "/subscriptions/632fe810-836a-4fe4-8a23-c258282b16af/resourceGroups/SBD-RG-NET"
-  policy_definition_id = data.azurerm_policy_set_definition.azure_monitor
+  name  = "example-policy-assignment"
+  scope = var.resid
+  # policy_definition_id = data.azurerm_policy_set_definition.example.id
+  policy_definition_id = data.azurerm_policy_set_definition.azure_monitor.id
   description          = "Policy assignement to monitor all vms"
   display_name         = "VM monitor initiative"
-
+  location             = "uksouth"
+  identity {
+    type = "SystemAssigned"
+  }
   parameters = <<PARAMETERS
 {
   "logAnalytics_1": {
