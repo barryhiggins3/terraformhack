@@ -1,5 +1,5 @@
 resource "azurerm_network_security_group" "nsg_example" {
-  name                = "nsg_test1"
+  name                = var.nsgname
   location            = var.location
   resource_group_name = var.resname
 
