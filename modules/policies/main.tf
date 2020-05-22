@@ -9,7 +9,7 @@ resource "azurerm_policy_assignment" "Policy-1" {
   policy_definition_id = data.azurerm_policy_set_definition.azure_monitor.id
   description          = "Policy assignement to monitor all vms"
   display_name         = "VM monitor initiative"
-  location             = "uksouth"
+  location             = var.location
   identity {
     type = "SystemAssigned"
   }
@@ -21,4 +21,21 @@ resource "azurerm_policy_assignment" "Policy-1" {
 }
 PARAMETERS
 
+}
+
+data "azurerm_policy_set_definition" "ISO27001" {
+  display_name = "[Preview]: Audit ISO 27001:2013 controls and deploy specific VM Extensions to support audit requirements"
+}
+
+resource "azurerm_policy_assignment" "Policy-2" {
+  name  = "ISO_27001_policy_assignment"
+  scope = var.resid
+  # policy_definition_id = data.azurerm_policy_set_definition.example.id
+  policy_definition_id = data.azurerm_policy_set_definition.ISO27001.id
+  description          = "Modality Audit ISO 27001 controls and deploy specific VM Extensions to support audit requirements"
+  display_name         = "Modality ISO 27001 Audit policy assignement"
+  location             = var.location
+  identity {
+    type = "SystemAssigned"
+  }
 }

@@ -180,7 +180,12 @@ module "virtual_net_nsg_2" {
     }
   ]
 }
+
+data "azurerm_subscription" "current" {
+}
+
 module "policies" {
   source  = "./modules/policies"
-  resid = module.network_resourcegroup.resource_group_id
+  resid = data.azurerm_subscription.current.id
+ location = var.location
 }
