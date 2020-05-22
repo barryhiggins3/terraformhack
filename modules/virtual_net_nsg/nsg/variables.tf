@@ -15,9 +15,3 @@ variable "tags" {
     buildagent  = "github-actions"
   }
 }
-variable "rules" {
-  description = "The rule set for the network security group."
-}
-variable "nsgname" {
-  description = "Network security group name."
-}
