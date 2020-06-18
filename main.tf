@@ -1,5 +1,7 @@
 provider "azurerm" {
   version = ">= 2.0"
+  #tenant_id = ""
+  #subscription_id = ""
   features {}
 }
 terraform {
@@ -57,7 +59,18 @@ module "network" {
       subnet_address_prefix            = "10.0.7.0/24"
       subnet_network_security_group_id = module.virtual_net_nsg_2.network_security_group_id
     }
+    #{
+      #subnet_name                      = "AzureBastionSubnet"
+      #subnet_address_prefix            = "10.0.200.0/24"
+      #subnet_network_security_group_id = null
+    #}
   ]
+}
+resource "azurerm_subnet" "bastionsubnet" {
+  name                 = "AzureBastionSubnet"
+  resource_group_name  = module.network_resourcegroup.resource_group_name
+  virtual_network_name = module.network.name
+  address_prefix       = "10.0.200.0/24"
 }
 module "security_centre" {
   source          = "./modules/securitycentre"
@@ -185,7 +198,12 @@ data "azurerm_subscription" "current" {
 }
 
 module "policies" {
-  source  = "./modules/policies"
-  resid = data.azurerm_subscription.current.id
- location = var.location
+  source   = "./modules/policies"
+  resid    = data.azurerm_subscription.current.id
+  location = var.location
+}
+
+module "managementgroups" {
+  source             = "./modules/managementgroups"
+  customerdomainname = var.customerdomainname
 }

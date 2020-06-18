@@ -24,7 +24,7 @@ PARAMETERS
 }
 
 data "azurerm_policy_set_definition" "ISO27001" {
-  display_name = "[Preview]: Audit ISO 27001:2013 controls and deploy specific VM Extensions to support audit requirements"
+  display_name = "ISO 27001:2013"
 }
 
 resource "azurerm_policy_assignment" "Policy-2" {
