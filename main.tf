@@ -15,6 +15,10 @@ resource "azurerm_resource_group" "example" {
   name     = "example-resources"
   location = var.location
 }
+resource "azurerm_resource_group" "example-1" {
+  name     = "example-resources-1"
+  location = var.location
+}
 module "storage" {
   source               = "./modules/storageaccounts"
   storage_account_name = "modalityhacksto4"
