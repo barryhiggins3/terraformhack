@@ -39,7 +39,7 @@ module "network_resourcegroup" {
   location = var.location
 }
 module "network" {
-  source   = "./modules/network"
+  source   = "github.com/barryhiggins3/modality-vnet"
   resname  = module.network_resourcegroup.resource_group_name
   location = var.location
   subnets = [
