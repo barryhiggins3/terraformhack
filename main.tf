@@ -12,11 +12,11 @@ terraform {
   }
 }
 resource "azurerm_resource_group" "example" {
-  name     = "example-resources"
+  name     = var.resname 
   location = var.location
 }
 resource "azurerm_resource_group" "example-1" {
-  name     = "example-resources-2"
+  name     = var.resname2
   location = var.location
 }
 module "storage" {

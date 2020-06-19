@@ -16,3 +16,11 @@ variable "customerdomainname" {
   default = "GCI_Test"
   # type = string
 }
+variable "resname" {
+  default = "example-resources"
+  # type = string
+}
+variable "resname2" {
+  default = "example-resources-2"
+  # type = string
+}
