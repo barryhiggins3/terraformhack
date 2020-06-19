@@ -16,7 +16,7 @@ resource "azurerm_resource_group" "example" {
   location = var.location
 }
 resource "azurerm_resource_group" "example-1" {
-  name     = "example-resources-1"
+  name     = "example-resources-2"
   location = var.location
 }
 module "storage" {
