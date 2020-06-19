@@ -207,7 +207,7 @@ module "policies" {
   location = var.location
 }
 
-# module "managementgroups" {
-#   source             = "./modules/managementgroups"
-#   customerdomainname = var.customerdomainname
-# }
+module "managementgroups" {
+  source             = "./modules/managementgroups"
+  customerdomainname = var.customerdomainname
+}
